@@ -1,0 +1,7 @@
+{
+  "name": "wetter",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue-vite"
+}
