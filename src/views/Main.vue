@@ -1,3 +1,111 @@
+<script lang="ts">
+function printDate(date) {
+  const temp = new Date(date);
+  const pad = (i) => (i < 10) ? "0" + i : "" + i;
+
+  return temp.getFullYear() +
+    pad(1 + temp.getMonth()) +
+    pad(temp.getDate()) +
+    pad(temp.getHours());
+}
+
+function get_src(map, date) {
+  var base_url = "https://www.wetter3.de/Archiv/GFS/";
+  var url = base_url + printDate(date) + "_" + map + ".gif";
+  console.log(url);
+  return url;
+}
+
+import { register } from 'swiper/element/bundle';
+register();
+import 'swiper/css/zoom';
+
+import { 
+  IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton, IonPicker, IonFooter, IonImg, IonSelect, IonList, IonSelectOption, IonItem, IonDatetime, IonGrid, IonRow, IonCol,
+  IonFab, IonFabButton, IonFabList, IonIcon
+} from '@ionic/vue';
+import { chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline } from 'ionicons/icons';
+
+import { defineComponent } from 'vue';
+
+export default defineComponent({
+    components: { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton, IonPicker, IonFooter, IonImg, IonSelectOption, IonSelect, IonList, IonItem, IonDatetime, 
+      IonGrid, IonRow, IonCol,
+      IonFab, IonFabButton, IonFabList, IonIcon
+    },
+    data: () => ({
+        imageSource: "https://www.wetter3.de/Archiv/GFS/" + printDate(new Date().setHours(Math.floor(new Date().getHours()/6)*6)) + "_1.gif",
+        map : 1,
+        date: new Date(
+          new Date().setHours(
+              Math.floor(new Date().getHours() / 6) * 6,
+              0,
+              0,
+              0
+          )
+        ).toISOString(),
+    }),
+    methods: {
+      onMapChange(value) {
+          this.map = value;
+          var target = get_src(this.map, this.date);
+          this.imageSource = target;
+      },
+      onDateChange(value) {
+        this.date = value;
+        var target = get_src(this.map, new Date(this.date));
+        this.imageSource = target;
+      },
+      updateDateAndImage(hoursOffset) {
+        let date = new Date(this.date);
+        let tzoffset = new Date().getTimezoneOffset() * 60 * 1000;
+        date.setTime(date.getTime() + hoursOffset * 60 * 60 * 1000);
+        this.imageSource = get_src(this.map, date);
+        date.setTime(date.getTime() - tzoffset);
+        this.date = date.toISOString().split(".")[0];
+        document.getElementById("date").innerText = this.date;
+      },
+      clickLeft() {
+        this.updateDateAndImage(-6);
+      },
+      clickRight() {
+        this.updateDateAndImage(6);
+      },
+      clickLeftDay() {
+        this.updateDateAndImage(-24);
+      },
+      clickRightDay() {
+        this.updateDateAndImage(24);
+      },
+      get_back() {
+        this.date = new Date(
+          new Date().setHours(
+              Math.floor(new Date().getHours() / 6) * 6,
+              0,
+              0,
+              0
+          )
+        ).toISOString();
+        this.updateDateAndImage(0);
+      }
+    },
+    setup() {
+      // const pickerColumns = [
+      //   {
+      //     name: 'map',
+      //     handler: (value) => {
+      //       console.log(`You selected  ${value}`);
+      //     },
+      //   },
+      // ];
+
+      return { 
+        chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline
+      };
+    },
+  });
+</script>
+
 <template>
   <ion-menu content-id="main-content">
     <ion-header>
@@ -28,9 +136,11 @@
 
       <ion-content :fullscreen="true" class="ion-padding" color="light">
 
-      <swiper-container :slides-per-view="1" :scrollbar="false" :navigation="true" :centered-slides="false" :space-between="0">
+      <swiper-container :slides-per-view="1" :scrollbar="true" :navigation="true" :centered-slides="true" :zoom="true" :grab-cursor="true" :keyboard="true">
         <swiper-slide>
-          <ion-img :src="imageSource" alt="No data"></ion-img>
+          <div class="swiper-zoom-container">
+            <img :src="imageSource" alt="No data" style="width: 100%; height: 100%;">
+          </div>
         </swiper-slide>
       </swiper-container>
 
@@ -127,145 +237,10 @@
   </ion-page>
 </template>
 
-<script lang="ts">
-function printDate(date) {
-  const temp = new Date(date);
-  const pad = (i) => (i < 10) ? "0" + i : "" + i;
-
-  return temp.getFullYear() +
-    pad(1 + temp.getMonth()) +
-    pad(temp.getDate()) +
-    pad(temp.getHours());
-}
-
-function get_src(map, date) {
-  var base_url = "https://www.wetter3.de/Archiv/GFS/";
-  var url = base_url + printDate(date) + "_" + map + ".gif";
-  console.log(url);
-  return url;
-}
-
-// import { Swiper, SwiperSlide } from 'swiper/vue';
-// import 'swiper/css';
-// import 'swiper/css/autoplay';
-import { register } from 'swiper/element/bundle';
-register();
-
-import { 
-  IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton, IonPicker, IonFooter, IonImg, IonSelect, IonList, IonSelectOption, IonItem, IonDatetime, IonGrid, IonRow, IonCol,
-  IonFab, IonFabButton, IonFabList, IonIcon
-} from '@ionic/vue';
-import { chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline } from 'ionicons/icons';
-
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-    components: { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton, IonPicker, IonFooter, IonImg, IonSelectOption, IonSelect, IonList, IonItem, IonDatetime, 
-      IonGrid, IonRow, IonCol,
-      IonFab, IonFabButton, IonFabList, IonIcon
-    },
-    data: () => ({
-        imageSource: "https://www.wetter3.de/Archiv/GFS/" + printDate(new Date().setHours(Math.floor(new Date().getHours()/6)*6)) + "_1.gif",
-        map : 1,
-        date: new Date(
-          new Date().setHours(
-              Math.floor(new Date().getHours() / 6) * 6,
-              0,
-              0,
-              0
-          )
-        ).toISOString(),
-    }),
-    methods: {
-      onMapChange(value) {
-          this.map = value;
-          var target = get_src(this.map, this.date);
-          this.imageSource = target;
-      },
-      onDateChange(value) {
-        this.date = value;
-        var target = get_src(this.map, new Date(this.date));
-        this.imageSource = target;
-      },
-      updateDateAndImage(hoursOffset) {
-        let date = new Date(this.date);
-        let tzoffset = new Date().getTimezoneOffset() * 60 * 1000;
-        date.setTime(date.getTime() + hoursOffset * 60 * 60 * 1000);
-        this.imageSource = get_src(this.map, date);
-        date.setTime(date.getTime() - tzoffset);
-        this.date = date.toISOString().split(".")[0];
-        document.getElementById("date").innerText = this.date;
-      },
-      clickLeft() {
-        this.updateDateAndImage(-6);
-      },
-      clickRight() {
-        this.updateDateAndImage(6);
-      },
-      clickLeftDay() {
-        this.updateDateAndImage(-24);
-      },
-      clickRightDay() {
-        this.updateDateAndImage(24);
-      },
-      get_back() {
-        this.date = new Date(
-          new Date().setHours(
-              Math.floor(new Date().getHours() / 6) * 6,
-              0,
-              0,
-              0
-          )
-        ).toISOString();
-        this.updateDateAndImage(0);
-      }
-    },
-    setup() {
-      // const pickerColumns = [
-      //   {
-      //     name: 'map',
-      //     handler: (value) => {
-      //       console.log(`You selected  ${value}`);
-      //     },
-      //   },
-      // ];
-
-      return { 
-        chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline
-      };
-    },
-  });
-</script>
 
 <style scoped>
 body {
   background-color: white;
-}
-
-.zoom-container {
-  position: fixed; /* Make it fixed to cover the entire screen */
-  top: 0;
-  left: 0;
-  width: 100vw; /* Full viewport width */
-  height: 100vh; /* Full viewport height */
-  overflow: hidden;
-  cursor: grab;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: transform 0.2s ease-in-out; /* Smooth zoom transition */
-}
-
-.zoom-container:active {
-  cursor: grabbing;
-}
-
-.zoom-container img {
-  width: auto; /* Stretch the image to fill the container horizontally */
-  height: 100%; /* Stretch the image to fill the container vertically */
-  object-fit: cover; /* Ensure the image covers the container while maintaining aspect ratio */
-  user-select: none; /* Prevent text selection while panning */
-  pointer-events: none; /* Disable pointer events on the image */
 }
 
 #container {
@@ -291,15 +266,6 @@ body {
 #container a {
   text-decoration: none;
 }
-
-/* ion-img { */
-  /* max-height: 100%; */
-  /* height: 100%; */
-  /* width: 100%; */
-  /* position: fixed; */
-  /* bottom: 0; */
-  /* transition: transform 0.2s ease-in-out; Smooth zoom transition */
-/* } */
 
 #my_footer {
   min-height: fit-content;
@@ -404,22 +370,6 @@ hr {
   margin: 1em 0;
   padding: 0;
 }
-
- /* Center */
-/* #foot_menu {
-  min-width: 400px;
-  position: fixed;
-  left: 50%;
-  transform: translate(-50%);
-  bottom: 0;
-  background-color: rgba(114, 106, 106, 0.6);
-  padding: 1em;
-  height: 88px;
-  border-radius: 12px;
-  border-color: white;
-  border-style: solid;
-  border-width: thin;
-} */
 
 /* Right */
 #foot_menu {
