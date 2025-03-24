@@ -17,54 +17,29 @@
         <ion-buttons slot="start">
           <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>Menu</ion-title>
+        <ion-row>
+          <ion-col>
+            <ion-title>Wetter3.de</ion-title>
+            <ion-title id="date"></ion-title>
+          </ion-col>
+        </ion-row>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content :fullscreen="true" class="ion-padding" color="light">
-      <!-- <ion-img :src="imageSource" alt="No data"></ion-img> -->
+      <ion-content :fullscreen="true" class="ion-padding" color="light">
 
-      <div
-        class="zoom-container"
-        @mousedown="startPan"
-        @mousemove="panImage"
-        @mouseup="endPan"
-        @mouseleave="endPan"
-        @wheel="zoomImage"
-        :style="{
-          transform: 'scale(' + zoomLevel + ') translate(' + panX + 'px, ' + panY + 'px)',
-        }"
-      >
-        <img :src="imageSource" alt="Zoomable and Pannable Image" />
-      </div>
-
-      <!-- <ion-img 
-        :src="imageSource" 
-        alt="No data" 
-        @wheel="zoomImage" 
-        :style="{ transform: 'scale(' + zoomLevel + ')' }">
-      </ion-img> -->
-
-
-      <!-- <Swiper
-        :zoom="true"
-        :slides-per-view="1"
-        :space-between="0"
-        class="mySwiper"
-      >
-        <SwiperSlide>
-          <div class="swiper-zoom-container">
-            <img :src="imageSource" alt="Zoomable Image" />
-          </div>
-        </SwiperSlide>
-      </Swiper> -->
+      <swiper-container :slides-per-view="1" :scrollbar="false" :navigation="true" :centered-slides="false" :space-between="0">
+        <swiper-slide>
+          <ion-img :src="imageSource" alt="No data"></ion-img>
+        </swiper-slide>
+      </swiper-container>
 
       <ion-footer id="my_footer">
         <ion-grid id="foot_menu">
           <ion-row>
             <ion-col>
               <ion-list>
-                <ion-select aria-label="Maps" interface="popover" placeholder="Select map" @ionChange="onMapChange($event.detail.value)" label-placement="stacked" justify="space-between">
+                <ion-select aria-label="Maps" interface="popover" placeholder="Select map" @ionChange="onMapChange($event.detail.value)" label-placement="stacked" justify="space-between" :value="map">
                   <ion-select-option value="1">500hPa geopot.,MSL pres., ReTop</ion-select-option>
                   <ion-select-option value="2">700hPa relative humidity</ion-select-option>
                   <ion-select-option value="3">850hPa geopot & temperature</ion-select-option>
@@ -170,21 +145,23 @@ function get_src(map, date) {
   return url;
 }
 
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import 'swiper/css';
-import 'swiper/css/autoplay';
+// import { Swiper, SwiperSlide } from 'swiper/vue';
+// import 'swiper/css';
+// import 'swiper/css/autoplay';
+import { register } from 'swiper/element/bundle';
+register();
 
-import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton, IonPicker, IonFooter, IonImg, IonSelect, IonList, IonSelectOption, IonItem, IonDatetime, IonGrid, IonRow, IonCol, openURL } from '@ionic/vue';
-
-import { IonFab, IonFabButton, IonFabList, IonIcon } from '@ionic/vue';
-import { add, chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline } from 'ionicons/icons';
+import { 
+  IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton, IonPicker, IonFooter, IonImg, IonSelect, IonList, IonSelectOption, IonItem, IonDatetime, IonGrid, IonRow, IonCol,
+  IonFab, IonFabButton, IonFabList, IonIcon
+} from '@ionic/vue';
+import { chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline } from 'ionicons/icons';
 
 import { defineComponent } from 'vue';
 
 export default defineComponent({
     components: { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton, IonPicker, IonFooter, IonImg, IonSelectOption, IonSelect, IonList, IonItem, IonDatetime, 
       IonGrid, IonRow, IonCol,
-      Swiper, SwiperSlide,
       IonFab, IonFabButton, IonFabList, IonIcon
     },
     data: () => ({
@@ -198,65 +175,8 @@ export default defineComponent({
               0
           )
         ).toISOString(),
-        zoomLevel: 1,
-        panX: 0, // Horizontal pan offset
-        panY: 0, // Vertical pan offset
-        isPanning: false, // Whether the user is currently panning
-        startX: 0, // Starting X position of the mouse
-        startY: 0, // Starting Y position of the mouse
     }),
     methods: {
-      zoomImage(event) {
-        const zoomStep = 0.1; // Adjust zoom step as needed
-        if (event.deltaY < 0) {
-          // Zoom in
-          this.zoomLevel = Math.min(this.zoomLevel + zoomStep, 3); // Max zoom level
-        } else {
-          // Zoom out
-          this.zoomLevel = Math.max(this.zoomLevel - zoomStep, 1); // Min zoom level
-        }
-
-        // Adjust pan values to ensure the image stays within bounds after zooming
-        this.adjustPanBounds();
-      },
-      resetPan() {
-        this.panX = 0;
-        this.panY = 0;
-      },
-      startPan(event) {
-        this.isPanning = true;
-        this.startX = event.clientX - this.panX;
-        this.startY = event.clientY - this.panY;
-      },
-      panImage(event) {
-        if (!this.isPanning) return;
-
-        // Calculate new pan values
-        const newPanX = event.clientX - this.startX;
-        const newPanY = event.clientY - this.startY;
-
-        // Apply bounds to prevent panning outside the image
-        this.panX = this.clampPan(newPanX, 'x');
-        this.panY = this.clampPan(newPanY, 'y');
-      },
-      endPan() {
-        this.isPanning = false;
-      },
-      clampPan(value, axis) {
-        const containerSize = axis === 'x' ? window.innerWidth : window.innerHeight;
-        const imageSize = containerSize * this.zoomLevel;
-
-        // Calculate the maximum pan offset
-        const maxPan = (imageSize - containerSize) / 2;
-
-        // Clamp the value between -maxPan and maxPan
-        return Math.max(-maxPan, Math.min(maxPan, value));
-      },
-      adjustPanBounds() {
-        // Ensure pan values are within bounds after zooming
-        this.panX = this.clampPan(this.panX, 'x');
-        this.panY = this.clampPan(this.panY, 'y');
-      },
       onMapChange(value) {
           this.map = value;
           var target = get_src(this.map, this.date);
@@ -274,6 +194,7 @@ export default defineComponent({
         this.imageSource = get_src(this.map, date);
         date.setTime(date.getTime() - tzoffset);
         this.date = date.toISOString().split(".")[0];
+        document.getElementById("date").innerText = this.date;
       },
       clickLeft() {
         this.updateDateAndImage(-6);
@@ -297,9 +218,6 @@ export default defineComponent({
           )
         ).toISOString();
         this.updateDateAndImage(0);
-        // this.zoomImage(1);
-        this.zoomLevel = 1;
-        this.resetPan();
       }
     },
     setup() {
@@ -374,22 +292,14 @@ body {
   text-decoration: none;
 }
 
-ion-img {
-  max-height: 100%;
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-  transition: transform 0.2s ease-in-out; /* Smooth zoom transition */
-}
-
-#img_props {
-  max-height: 100%;
-  height: 100%;
-  width: 100%;
-  position: fixed;
-  bottom: 0;
-}
+/* ion-img { */
+  /* max-height: 100%; */
+  /* height: 100%; */
+  /* width: 100%; */
+  /* position: fixed; */
+  /* bottom: 0; */
+  /* transition: transform 0.2s ease-in-out; Smooth zoom transition */
+/* } */
 
 #my_footer {
   min-height: fit-content;
@@ -398,10 +308,6 @@ ion-img {
   align-self: right;
   position: fixed;
   bottom: 0;
-}
-
-#open_picker {
-  opacity: 100%;
 }
 
 ion-list {
