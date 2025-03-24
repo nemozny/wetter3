@@ -1,12 +1,13 @@
 {
-  "name": "Wetter3",
-  "private": true,
+  "name": "wetter3",
+  "private": false,
   "version": "0.0.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "ionic build",
+    "build": "vite build",
     "preview": "vite preview",
+    "serve": "vite preview",
     "test:e2e": "cypress run",
     "test:unit": "vitest",
     "lint": "eslint",

@@ -24,12 +24,13 @@ npm run dev
 
 ### Run tests using the following command:
 ```
-npm run test
+npm run test:unit
 ```
 
 ### Deploy the contents of the dist/ directory to your hosting provider.
 ```
 npm run build
+npm run deploy
 ```
 
 ## License

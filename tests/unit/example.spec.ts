@@ -1,10 +1,10 @@
 import { mount } from '@vue/test-utils'
-import HomePage from '@/views/HomePage.vue'
+import Main from '@/views/Main.vue'
 import { describe, expect, test } from 'vitest'
 
-describe('HomePage.vue', () => {
+describe('Main.vue', () => {
   test('renders home vue', () => {
-    const wrapper = mount(HomePage)
+    const wrapper = mount(Main)
     expect(wrapper.text()).toMatch('Menu')
   })
 })
