@@ -3,7 +3,11 @@
     <ion-header>
     </ion-header>
     <ion-content color="black" class="ion-padding">
-      <h3>Select date</h3>
+      <h3>Wetter3.de</h3>
+      <a class="ion-home color-primary item" href="#" onclick="window.open('https://www.wetter3.de', '_system', 'location=yes'); return false;">https://www.wetter3.de</a>
+      <br/>
+      <h3>Github repo</h3>
+      <a class="ion-home color-primary item" href="#" onclick="window.open('https://github.com/nemozny/wetter3', '_system', 'location=yes'); return false;">https://github.com/nemozny/wetter3</a>
     </ion-content>
   </ion-menu>
 
@@ -56,20 +60,8 @@
       </Swiper> -->
 
       <ion-footer id="my_footer">
-        <ion-grid>
-          <ion-row id="foot_menu">
-            <ion-col></ion-col>
-            <ion-col>
-              <ion-fab-button @click="clickLeftDay()">
-                <ion-icon :icon="chevronBack"></ion-icon>
-                <ion-icon :icon="chevronBack"></ion-icon>
-              </ion-fab-button>
-            </ion-col>
-            <ion-col>
-              <ion-fab-button @click="clickLeft()">
-                <ion-icon :icon="chevronBack"></ion-icon>
-              </ion-fab-button>
-            </ion-col>
+        <ion-grid id="foot_menu">
+          <ion-row>
             <ion-col>
               <ion-list>
                 <ion-select aria-label="Maps" interface="popover" placeholder="Select map" @ionChange="onMapChange($event.detail.value)" label-placement="stacked" justify="space-between">
@@ -124,6 +116,19 @@
                 </ion-select>
               </ion-list>
             </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-fab-button @click="clickLeftDay()">
+                <ion-icon :icon="chevronBack"></ion-icon>
+                <ion-icon :icon="chevronBack"></ion-icon>
+              </ion-fab-button>
+            </ion-col>
+            <ion-col>
+              <ion-fab-button @click="clickLeft()">
+                <ion-icon :icon="chevronBack"></ion-icon>
+              </ion-fab-button>
+            </ion-col>
             <ion-col>
               <ion-fab-button @click="get_back()">
                 <ion-icon :icon="refreshOutline"></ion-icon>
@@ -169,7 +174,7 @@ import { Swiper, SwiperSlide } from 'swiper/vue';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 
-import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton, IonPicker, IonFooter, IonImg, IonSelect, IonList, IonSelectOption, IonItem, IonDatetime, IonGrid, IonRow, IonCol } from '@ionic/vue';
+import { IonButtons, IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonButton, IonPicker, IonFooter, IonImg, IonSelect, IonList, IonSelectOption, IonItem, IonDatetime, IonGrid, IonRow, IonCol, openURL } from '@ionic/vue';
 
 import { IonFab, IonFabButton, IonFabList, IonIcon } from '@ionic/vue';
 import { add, chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline } from 'ionicons/icons';
@@ -465,7 +470,7 @@ ion-grid {
 }
 
 ion-header {
-  opacity: 80%;
+  opacity: 60%;
 }
 
 #transparent {
@@ -513,13 +518,15 @@ hr {
 /* Right */
 #foot_menu {
   min-width: 400px;
+  width: fit-content;
   position: fixed;
   right: 0;
   /* transform: translate(-50%); */
   bottom: 0;
   background-color: rgba(114, 106, 106, 0.6);
   padding: 1em;
-  height: 88px;
+  /* height: 88px; */
+  height: fit-content;
   border-radius: 12px;
   border-color: white;
   border-style: solid;
