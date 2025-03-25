@@ -27,10 +27,23 @@ npm run dev
 npm run test:unit
 ```
 
+## Deploy to web
 ### Deploy the contents of the dist/ directory to your hosting provider.
 ```
 npm run build
 npm run deploy
+```
+
+## Build Android/iOS
+### Sync the web assets to the native platform.
+```
+npx cap sync
+```
+
+### Open the Native Project
+```
+npx cap open android
+npx cap open ios
 ```
 
 ## License

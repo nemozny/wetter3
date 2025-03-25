@@ -5,6 +5,6 @@ import { describe, expect, test } from 'vitest'
 describe('Main.vue', () => {
   test('renders home vue', () => {
     const wrapper = mount(Main)
-    expect(wrapper.text()).toMatch('Menu')
+    expect(wrapper.text()).toMatch('Wetter3.de')
   })
 })
