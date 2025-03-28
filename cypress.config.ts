@@ -7,8 +7,8 @@ export default defineConfig({
     videosFolder: "tests/e2e/videos",
     screenshotsFolder: "tests/e2e/screenshots",
     baseUrl: "http://localhost:5173",
-    setupNodeEvents(on, config) {
+    // setupNodeEvents(on, config) {
       // implement node event listeners here
-    },
+    // },
   },
 });
