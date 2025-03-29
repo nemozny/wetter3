@@ -1,6 +1,6 @@
 # Wetter3
 
-Wetter3 is a mobile frontend build on top of [https://www.wetter3.de](https://www.wetter3.de).
+Wetter3 is a mobile frontend built on top of [https://www.wetter3.de](https://www.wetter3.de).
 
 Wetter3 is a weather chart application built with Vue 3, Ionic, and Capacitor. It provides an interactive way to view weather data, including zooming, panning, and selecting different map types.
 
