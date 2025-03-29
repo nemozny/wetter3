@@ -25,22 +25,26 @@
     min-width: 300px;
     max-height: 50px;
     padding: 0;
-    margin: 0;
-    background-color: rgba(0,0,0,0.6);
-    box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
-    color: white;
+    margin: 0 !important;
+    background-color: rgba(0,0,0);
+    opacity: 0.7;
     align-self: stretch;
   }
   
   ion-select {
-    background: transparent;
-    /* opacity: 80%; */
     text-align: center;
-    font-size: 0.8em;
+    font-size: 1 em;
+    font-weight: bold;
+    color: white;
+  }
+
+  ion-select::part(placeholder) {
+    color: white;
+    opacity: 1 !important;
   }
 
    ion-fab-button::part(native) {
-    background-color: rgba(0, 0, 0, 1) !important;
+    background-color: rgba(0, 0, 0, 0.7) !important;
     border-radius: 4px;
     box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
     color: white;
@@ -48,7 +52,7 @@
   
   
   ion-header {
-    opacity: 90%;
+    opacity: 70%;
   }
   
   #transparent {
@@ -57,7 +61,7 @@
   }
   
   ion-menu {
-    --background: rgba(0, 0, 0, 0.8);
+    --background: rgba(0, 0, 0, 0.7);
     --ion-background-color: transparent;
     --ion-color-base: transparent !important;
     left: 0px;
@@ -92,17 +96,25 @@
     border-width: thin;
   }
 
-  ion-grid {
-    --ion-grid-width: 50%;
+  /* Name	Value	  Description
+      xs	100%	  Width is 100% for xs screens
+      sm	540px	  Set grid width to 540px when (min-width: 576px)
+      md	720px	  Set grid width to 720px when (min-width: 768px)
+      lg	960px	  Set grid width to 960px when (min-width: 992px)
+      xl	1140px	Set grid width to 1140px when (min-width: 1200px) 
+  */
 
-    --ion-grid-width-xs: 100%;
-    --ion-grid-width-sm: 60%;
-    --ion-grid-width-md: 40%;
-    --ion-grid-width-lg: 60%;
-    --ion-grid-width-xl: 60%;
+  ion-grid {
+    --ion-grid-width: 620px;
+
+    --ion-grid-width-xs: 310px;
+    --ion-grid-width-sm: 620px;
+    --ion-grid-width-md: 620px;
+    --ion-grid-width-lg: 620px;
+    --ion-grid-width-xl: 620px;
   }
 
   .dark {
-    background-color: rgba(0, 0, 0, 1) !important;
-    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.7) !important;
+    /* color: #ffffff; */
   }

@@ -8,7 +8,7 @@ import { register } from 'swiper/element/bundle';
 import 'swiper/css/zoom';
 import {
   IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonFooter, IonSelect, IonList, IonSelectOption, IonGrid, IonRow, IonCol,
-  IonFabButton, IonIcon, IonItem, IonButtons, IonImg
+  IonFabButton, IonIcon, IonItem, IonButtons, IonImg,
 } from '@ionic/vue';
 import { chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline } from 'ionicons/icons';
 import { defineComponent } from 'vue';
@@ -30,7 +30,7 @@ register();
 export default defineComponent({
   components: {
     IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonFooter, IonSelectOption, IonSelect, IonList,
-    IonGrid, IonRow, IonCol, IonFabButton, IonIcon, IonItem, IonButtons, IonImg
+    IonGrid, IonRow, IonCol, IonFabButton, IonIcon, IonItem, IonButtons, IonImg,
   },
   data: () => ({
     imageSource: get_src(1, new Date(new Date().setHours(Math.floor(new Date().getHours() / 6) * 6))),
@@ -182,7 +182,7 @@ export default defineComponent({
       <ion-footer id="my_footer" class="ion-no-border">
         <ion-grid :fixed="true" class="ion-no-padding">
 
-          <ion-row class="ion-align-items-center">
+          <ion-row class="ion-align-items-center ion-justify-content-center">
             <ion-col size="auto">
               <ion-fab-button @click="clickLeftDay()" size="small">
                 <ion-icon :icon="chevronBack"></ion-icon>
@@ -211,7 +211,7 @@ export default defineComponent({
               </ion-fab-button>
             </ion-col>
 
-            <ion-col>
+            <ion-col size="auto">
               <ion-list :inset="true" class="dark">
                 <ion-item class="dark">
                   <ion-select
