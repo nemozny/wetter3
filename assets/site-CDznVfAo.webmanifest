@@ -3,25 +3,25 @@
   "short_name": "Wetter3",
   "icons": [
     {
-      "src": "img/icons/pwa-192x192.png",
+      "src": "/wetter3/img/icons/pwa-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "img/icons/pwa-512x512.png",
+      "src": "/wetter3/img/icons/pwa-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "img/icons/pwa-maskable-192x192.png",
+      "src": "/wetter3/img/icons/pwa-maskable-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "img/icons/pwa-maskable-512x512.png",
+      "src": "/wetter3/img/icons/pwa-maskable-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
@@ -41,14 +41,20 @@
   "related_applications": [],
   "screenshots": [
     {
-      "src": "img/screenshots/screenshot1.png",
-      "sizes": "800x480",
+      "src": "/wetter3/img/screenshots/screenshot1.png",
+      "sizes": "844x392",
       "type": "image/png"
     },
     {
-      "src": "img/screenshots/screenshot2.png",
-      "sizes": "1080x768",
+      "src": "/wetter3/img/screenshots/screenshot2.png",
+      "sizes": "1108x783",
       "type": "image/png"
+    },
+    {
+      "src": "/wetter3/img/screenshots/screenshot3.png",
+      "sizes": "1845x908",
+      "type": "image/png",
+      "form_factor" : "wide"
     }
   ]
 }
