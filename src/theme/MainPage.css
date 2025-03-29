@@ -1,17 +1,4 @@
-.header-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.2); /* Optional: Add transparency */
-  }
-  
-  #container a {
-    text-decoration: none;
-  }
-  
-  #my_footer {
+ #my_footer {
     min-height: fit-content;
     max-height: fit-content;
     text-align: center;
@@ -118,3 +105,30 @@
     background-color: rgba(0, 0, 0, 0.7) !important;
     /* color: #ffffff; */
   }
+
+  #missing_data {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+  }
+
+  ion-segment-button {
+    --indicator-color: white;
+    --color-checked: white;
+  }
+
+  swiper-container {
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  
+  .swiper-zoom-container>img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    object-position: center;
+}

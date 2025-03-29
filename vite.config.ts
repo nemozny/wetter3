@@ -14,7 +14,43 @@ export default defineConfig({
         }
       }
     }),
-    VitePWA({ registerType: 'autoUpdate' })
+    VitePWA({ 
+      registerType: 'autoUpdate',
+      includeAssets: ['favicon.ico', 'robots.txt', 'android-chrome-192x192.png', 'android-chrome-512x512.png', 
+        'apple-touch-icon.png', 'favicon-16x16.png', 'favicon-32x32.png'],
+      manifest: {
+        name: 'Wetter3',
+        short_name: 'Wetter3',
+        description: 'Wetter3 - Weathers Maps for Mobile',
+        theme_color: '#ffffff',
+        icons: [
+          {
+            "src": "/img/icons/pwa-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+          },
+          {
+            "src": "/img/icons/pwa-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any"
+          },
+          {
+            "src": "/img/icons/pwa-maskable-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+          },
+          {
+            "src": "/img/icons/pwa-maskable-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+          }
+        ]
+      }
+    })
   ],
   resolve: {
     alias: {
@@ -23,7 +59,10 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: 'jsdom'
+    environment: 'jsdom',
+    isolate: false,
+    fileParallelism: false,
+    pool: 'threads',
   },
   base: '/wetter3/',
 })

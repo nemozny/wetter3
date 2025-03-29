@@ -1,0 +1,60 @@
+{
+  "name": "Wetter3 - Weather Maps for Mobile",
+  "short_name": "Wetter3",
+  "icons": [
+    {
+      "src": "/wetter3/img/icons/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/wetter3/img/icons/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/wetter3/img/icons/pwa-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/wetter3/img/icons/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "start_url": "/wetter3",
+  "display": "fullscreen",
+  "background_color": "#FFFFFF",
+  "theme_color": "#FFFFFF",
+  "description": "Wetter3 - Weather Maps for Mobile",
+  "id": "https://nemozny.github.io/wetter3",
+  "categories" : ["weather"],
+  "dir": "ltr",
+  "lang": "en-US",
+  "orientation": "landscape",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "screenshots": [
+    {
+      "src": "/wetter3/img/screenshots/screenshot1.png",
+      "sizes": "844x392",
+      "type": "image/png"
+    },
+    {
+      "src": "/wetter3/img/screenshots/screenshot2.png",
+      "sizes": "1108x783",
+      "type": "image/png"
+    },
+    {
+      "src": "/wetter3/img/screenshots/screenshot3.png",
+      "sizes": "1845x908",
+      "type": "image/png",
+      "form_factor" : "wide"
+    }
+  ]
+}
