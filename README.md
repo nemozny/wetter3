@@ -49,9 +49,16 @@ npx cap open ios
 ## License
 This project is licensed under the MIT License.
 
+## Credits
+Wetter3.de
+
+Dipl.-Met. Rainer Behrendt & Dipl.-Met. Dr. Holger Mahlke, GbR
+
 ## Acknowledgments
 Built with Vue 3, Ionic Framework, and Capacitor.
-Weather data sourced from Wetter3.
+
+Weather data sourced from Wetter3.de.
+
 This project was partially built using GitHub Copilot to assist with code generation and documentation.
 
 ## Contributing
