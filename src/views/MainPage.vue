@@ -8,7 +8,7 @@ import { register } from 'swiper/element/bundle';
 import 'swiper/css/zoom';
 import {
   IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonFooter, IonSelect, IonList, IonSelectOption, IonGrid, IonRow, IonCol,
-  IonFabButton, IonIcon, IonItem
+  IonFabButton, IonIcon, IonItem, IonButtons, IonImg
 } from '@ionic/vue';
 import { chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline } from 'ionicons/icons';
 import { defineComponent } from 'vue';
@@ -30,7 +30,7 @@ register();
 export default defineComponent({
   components: {
     IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonFooter, IonSelectOption, IonSelect, IonList,
-    IonGrid, IonRow, IonCol, IonFabButton, IonIcon, IonItem
+    IonGrid, IonRow, IonCol, IonFabButton, IonIcon, IonItem, IonButtons, IonImg
   },
   data: () => ({
     imageSource: get_src(1, new Date(new Date().setHours(Math.floor(new Date().getHours() / 6) * 6))),
@@ -65,7 +65,7 @@ export default defineComponent({
       if (isDay) {
         date.setDate(date.getDate() + step);
         this.date = date.toISOString();
-        
+
       } else{
         if (this.currentHourIndex === -1) {
           this.updateCurrentHourIndex();
@@ -135,22 +135,34 @@ export default defineComponent({
   </ion-menu>
 
   <ion-page id="main-content">
-    <ion-header class="header-overlay">
+    <ion-header>
       <ion-toolbar>
-        <ion-buttons>
-          <ion-menu-button></ion-menu-button>
-        </ion-buttons>
-        <ion-row>
-          <ion-col>
+        <ion-row class="ion-align-items-center">
+          <ion-col size="1" pull="start">
+            <ion-buttons>
+              <ion-menu-button></ion-menu-button>
+            </ion-buttons>
+          </ion-col>
+          <ion-col offset="3" size="3">
             <ion-title>Wetter3.de</ion-title>
+          </ion-col>
+          <ion-col offset="2" size="3">
             <ion-title id="current_date"></ion-title>
           </ion-col>
         </ion-row>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content :fullscreen="true" class="ion-padding" color="light">
-      <swiper-container
+    <ion-content :fullscreen="true" class="scrollable-content" color="light">
+      <ion-img
+        :src="imageSource"
+        alt="No data"
+        class="scrollable-img"
+        >
+      </ion-img>
+    </ion-content>
+
+      <!-- <swiper-container
         :slides-per-view="1"
         :scrollbar="true"
         :navigation="true"
@@ -161,26 +173,56 @@ export default defineComponent({
       >
         <swiper-slide>
           <div class="swiper-zoom-container">
-            <img :src="imageSource" alt="No data" style="width: 100%; height: 100%;" />
+            <img :src="imageSource" alt="No data" style="min-width: 1080px; height: 100%;" /> -->
+            <!-- <img :src="imageSource" alt="No data" style="min-height: 768px; min-width: 513px;" />
           </div>
         </swiper-slide>
-      </swiper-container>
+      </swiper-container> -->
 
-      <ion-footer id="my_footer">
-        <ion-grid id="foot_menu">
+      <ion-footer id="my_footer" class="ion-no-border">
+        <ion-grid :fixed="true" class="ion-no-padding">
 
-          <ion-row>
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto">
+              <ion-fab-button @click="clickLeftDay()" size="small">
+                <ion-icon :icon="chevronBack"></ion-icon>
+                <ion-icon :icon="chevronBack"></ion-icon>
+              </ion-fab-button>
+            </ion-col>
+            <ion-col size="auto">
+              <ion-fab-button @click="clickLeft()" size="small">
+                <ion-icon :icon="chevronBack"></ion-icon>
+              </ion-fab-button>
+            </ion-col>
+            <ion-col size="auto">
+              <ion-fab-button @click="resetDate()" size="small">
+                <ion-icon :icon="refreshOutline"></ion-icon>
+              </ion-fab-button>
+            </ion-col>
+            <ion-col size="auto">
+              <ion-fab-button @click="clickRight()" size="small">
+                <ion-icon :icon="chevronForward"></ion-icon>
+              </ion-fab-button>
+            </ion-col>
+            <ion-col size="auto">
+              <ion-fab-button @click="clickRightDay()" size="small">
+                <ion-icon :icon="chevronForward"></ion-icon>
+                <ion-icon :icon="chevronForward"></ion-icon>
+              </ion-fab-button>
+            </ion-col>
+
             <ion-col>
-              <ion-list>
-                <ion-item>
+              <ion-list :inset="true" class="dark">
+                <ion-item class="dark">
                   <ion-select
                     aria-label="Maps"
-                    interface="popover"
+                    interface="modal"
                     placeholder="Select weather map"
                     @ionChange="onMapChange($event.detail.value)"
                     label-placement="stacked"
-                    justify="space-between"
+                    justify="end"
                     :value="map"
+                    class="dark"
                   >
                     <ion-select-option value="1">500hPa geopot.,MSL pres., ReTop</ion-select-option>
                     <ion-select-option value="2">700hPa relative humidity</ion-select-option>
@@ -233,208 +275,11 @@ export default defineComponent({
                   </ion-select>
                 </ion-item>
               </ion-list>
-            </ion-col>
-          </ion-row>
-          
-          <ion-row>
-            <ion-col>
-              <ion-fab-button @click="clickLeftDay()">
-                <ion-icon :icon="chevronBack"></ion-icon>
-                <ion-icon :icon="chevronBack"></ion-icon>
-              </ion-fab-button>
-            </ion-col>
-            <ion-col>
-              <ion-fab-button @click="clickLeft()">
-                <ion-icon :icon="chevronBack"></ion-icon>
-              </ion-fab-button>
-            </ion-col>
-            <ion-col>
-              <ion-fab-button @click="resetDate()">
-                <ion-icon :icon="refreshOutline"></ion-icon>
-              </ion-fab-button>
-            </ion-col>
-            <ion-col>
-              <ion-fab-button @click="clickRight()">
-                <ion-icon :icon="chevronForward"></ion-icon>
-              </ion-fab-button>
-            </ion-col>
-            <ion-col>
-              <ion-fab-button @click="clickRightDay()">
-                <ion-icon :icon="chevronForward"></ion-icon>
-                <ion-icon :icon="chevronForward"></ion-icon>
-              </ion-fab-button>
+              
             </ion-col>
           </ion-row>
 
         </ion-grid>
       </ion-footer>
-    </ion-content>
   </ion-page>
 </template>
-
-<!-- <style scoped>
-.header-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
-    background: rgba(255, 255, 255, 0.8); /* Optional: Add transparency */
-  }
-  
-  body {
-    background-color: white;
-  }
-  
-  #container {
-    text-align: center;
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-  }
-  
-  #container strong {
-    font-size: 20px;
-    line-height: 26px;
-  }
-  
-  #container p {
-    font-size: 16px;
-    line-height: 22px;
-    color: #8c8c8c;
-    margin: 0;
-  }
-  
-  #container a {
-    text-decoration: none;
-  }
-  
-  #my_footer {
-    min-height: fit-content;
-    max-height: fit-content;
-    text-align: center;
-    align-self: right;
-    position: fixed;
-    bottom: 0;
-  }
-  
-  ion-list {
-    max-width: 300px; 
-    min-width: 300px;
-    max-height: 56px;
-    padding: 0;
-    background-color: rgba(0,0,0,0.6);
-    box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
-    color: white;
-    align-self: stretch;
-    text-align: center;
-  }
-  
-  ion-item {
-    background-color: rgba(0,0,0,0.4);
-    border-style: solid;
-    border-width: thin;
-    border-color: white;
-  }
-  
-  ion-select {
-    background: transparent;
-    opacity: 80%;
-    text-align: center;
-  }
-  
-  ion-select-option {
-    background-color: transparent;
-    opacity: 50%;
-    text-align: center;
-  }
-  
-  ion-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    align-content: center;
-  }
-  
-  ion-col {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    align-content: space-around;
-  }
-  
-  ion-datetime {
-    --background: rgba(255,255,255,0.3);
-    background: transparent;
-    --background-color: rgba(0,0,0,0);
-    align-items: start;
-  }
-  
-  ion-fab-button::part(native) {
-    background-color: rgba(0,0,0,0.6);
-    border-radius: 4px;
-    box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
-    color: white;
-  }
-  
-  ion-grid {
-    background-color: rgba(0, 0, 0, 0);
-  }
-  
-  ion-header {
-    opacity: 60%;
-  }
-  
-  #transparent {
-    color: white;
-    background-color: transparent;
-  }
-  
-  ion-menu {
-    --background: rgba(0, 0, 0, 0.8);
-    --ion-background-color: transparent;
-    --ion-color-base: transparent !important;
-    left: 0px;
-  }
-  
-  h3 {
-    left: 20px;
-    position: relative;
-  }
-  
-  hr {
-    display: block;
-    height: 1px;
-    border: 0;
-    border-top: 1px solid white;
-    margin: 1em 0;
-    padding: 0;
-  }
-  
-  /* Right */
-  #foot_menu {
-    min-width: 400px;
-    width: fit-content;
-    position: fixed;
-    right: 0;
-    /* transform: translate(-50%); */
-    bottom: 0;
-    background-color: rgba(114, 106, 106, 0.6);
-    padding: 1em;
-    /* height: 88px; */
-    height: fit-content;
-    border-radius: 12px;
-    border-color: white;
-    border-style: solid;
-    border-width: thin;
-  }
-  
-  .item.item-trns {
-    border-color: rgba(0, 0, 0, 0);
-    background-color: rgba(0, 0, 0, 0);
-    color: white; 
-  }
-  </style> -->
