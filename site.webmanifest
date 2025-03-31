@@ -33,12 +33,19 @@
   "theme_color": "#FFFFFF",
   "description": "Wetter3 - Weather Maps for Mobile",
   "id": "https://nemozny.github.io/wetter3",
+  "scope" : "https://nemozny.github.io/wetter3",
   "categories" : ["weather"],
   "dir": "ltr",
   "lang": "en-US",
   "orientation": "landscape",
   "prefer_related_applications": false,
   "related_applications": [],
+  "launch_handler": {
+    "client_mode": ["navigate-existing", "auto"]
+  },
+  "edge_side_panel": {
+    "preferred_width": 620
+  },
   "screenshots": [
     {
       "src": "/wetter3/img/screenshots/screenshot1.png",

@@ -2,180 +2,7 @@
 @import '../theme/MainPage.css';
 </style>
 
-<script lang="ts">
-// Imports
-import { register } from 'swiper/element/bundle';
-import 'swiper/css/zoom';
-import {
-  IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonFooter, IonSelect, IonList, IonSelectOption, IonGrid, IonRow, IonCol,
-  IonFabButton, IonIcon, IonItem, IonButtons, IonImg,
-  IonSegment,
-  IonSegmentView,
-  IonSegmentButton,
-  IonSegmentContent,
-  IonLabel
-} from '@ionic/vue';
-import { chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline } from 'ionicons/icons';
-import { defineComponent } from 'vue';
-
-// Utility functions
-function printDate(date: Date, analyse: boolean): string {
-  const temp = new Date(date);
-  const pad = (i: number) => (i < 10 ? "0" + i : "" + i);
-  const year = analyse ? temp.getFullYear() % 100 : temp.getFullYear()
-  return year + pad(1 + temp.getMonth()) + pad(temp.getDate()) + pad(temp.getHours());
-}
-
-function get_src(map: string, date: Date): string {
-  const base_url = "https://www.wetter3.de/Archiv/GFS/";
-  return `${base_url}${printDate(date, false)}_${map}.gif`;
-}
-
-register();
-
-export default defineComponent({
-  components: {
-    IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonFooter, IonSelectOption, IonSelect, IonList,
-    IonGrid, IonRow, IonCol, IonFabButton, IonIcon, IonItem, IonButtons, IonImg, IonSegment, IonSegmentView, IonSegmentButton, IonSegmentContent,
-    IonLabel
-  },
-  data: () => ({
-    imageSource: get_src("1", new Date(new Date().setHours(Math.floor(new Date().getHours() / 6) * 6))),
-    map: "1",
-    date: new Date(
-      new Date().setHours(Math.floor(new Date().getHours() / 6) * 6, 0, 0, 0)
-    ).toISOString(),
-    hoursSequence: [0, 6, 12, 18],
-    currentHourIndex: -1,
-    originalHourIndex: -1,
-    selectedSegment: "maps",
-    isImageVisible: true,
-  }),
-  methods: {
-    get_analyse_map(map: string, date: Date): string {
-      let base_url;
-      if (map === "DWD_Analyse") {
-        base_url = "https://www.wetter3.de/Archiv/DWD/";
-      } else if (map === "UKMet_Analyse") {
-        base_url = "https://www.wetter3.de/Archiv/UKMet/";
-      } else {
-        return "";
-      }
-
-      const map_url = `${base_url}${printDate(date, true)}_${map}.gif`;
-      // const map_url = `${base_url}${hour < 12 ? "0" + hour : hour}_${map}.gif`;
-      console.log(map_url);
-      return map_url;
-    },
-    onSegmentChange(event: CustomEvent) {
-      this.selectedSegment = event.detail.value;
-      if (this.selectedSegment === "maps") {
-        this.resetMap()
-      } else if (this.selectedSegment === "analyse") {
-        this.resetMap()
-      }
-
-      this.currentHourIndex = -1;
-      this.onMapChange(this.map);
-    },
-    updateCurrentHourIndex() {
-      const currentHour = Math.floor(new Date(this.date).getHours() / 6) * 6;
-      this.currentHourIndex = this.hoursSequence.findIndex((hour) => hour === currentHour);
-      this.originalHourIndex = this.currentHourIndex;
-    },
-    onMapChange(value: string) {
-      this.map = value.toString();
-      this.updateImageSource();
-    },
-    onDateChange(value: string) {
-      this.date = value;
-      this.updateImageSource();
-    },
-    updateImageSource() {
-      if (this.selectedSegment === "maps") {
-        const target = get_src(this.map, new Date(this.date));
-        this.imageSource = target;
-      } else if (this.selectedSegment === "analyse") {
-        const target = this.get_analyse_map(this.map, new Date(this.date));
-        this.imageSource = target;
-      }
-    },
-    updateDateAndImage(step: number, isDay: boolean = false) {
-      this.hideErrorMessage();
-
-      const date = new Date(this.date);
-      if (isDay) {
-        date.setDate(date.getDate() + step);
-        this.date = date.toISOString();
-
-      } else{
-        if (this.currentHourIndex === -1) {
-          this.updateCurrentHourIndex();
-        }
-
-        if (this.currentHourIndex === this.hoursSequence.length - 1 && step > 0) {
-          this.currentHourIndex = 0;
-          date.setDate(date.getDate() + 1);
-          date.setHours(this.hoursSequence[this.currentHourIndex]);
-          this.date = date.toISOString();
-
-        } else if (this.currentHourIndex === 0 && step < 0) {
-          this.currentHourIndex = this.hoursSequence.length - 1;
-          date.setDate(date.getDate() - 1);
-          date.setHours(this.hoursSequence[this.currentHourIndex]);
-          this.date = date.toISOString();
-        } else {
-          this.currentHourIndex += step;
-          date.setHours(this.hoursSequence[this.currentHourIndex]);
-          this.date = date.toISOString();
-        }
-      }
-
-      this.updateImageSource();
-      document.getElementById("current_date").innerText = new Date(this.date).toLocaleString();
-    },
-    clickLeft() {
-      this.updateDateAndImage(-1);
-    },
-    clickRight() {
-      this.updateDateAndImage(1);
-    },
-    clickLeftDay() {
-      this.updateDateAndImage(-1, true);
-    },
-    clickRightDay() {
-      this.updateDateAndImage(1, true);
-    },
-    hideErrorMessage() {
-      this.isImageVisible = true;
-      document.getElementById("missing_data").innerText = "";
-    },
-    resetMap() {
-      const now = new Date();
-      now.setHours(Math.floor(now.getHours() / 6) * 6, 0, 0, 0);
-      if (this.selectedSegment === "maps") {
-        this.map = 1;
-        this.date = now.toISOString();
-      } else if (this.selectedSegment === "analyse") {
-        this.map = "DWD_Analyse";
-        this.date = new Date(now - 6 * 60 * 60 * 1000).toISOString();
-      }
-
-      this.hideErrorMessage();
-      this.currentHourIndex = -1;
-      this.updateImageSource();
-      document.getElementById("current_date").innerText = new Date(this.date).toLocaleString();
-    },
-    onImageError() {
-      console.error("Image not found");
-      this.isImageVisible = false;
-      document.getElementById("missing_data").innerText = "No data for this combination of map and date.";
-    }
-  },
-  setup() {
-    return { chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline };
-  },
-});
+<script lang="ts" src='../script/MainPage.ts'>
 </script>
 
 <template>
@@ -213,33 +40,19 @@ export default defineComponent({
     </ion-header>
 
     <ion-content :fullscreen="true" class="scrollable-content" color="light">
-      <!-- <ion-img
-        v-if="isImageVisible"
-        :src="imageSource"
-        alt="Map"
-        class="scrollable-img"
-        @ionError="onImageError"
-        >
-      </ion-img> -->
-
-    <div id="missing_data">
-    </div>
-
       <swiper-container
+        init="false"
         :slides-per-view="1"
-        :scrollbar="true"
+        :space-between="0"
         :navigation="true"
-        :centered-slides="true"
-        :zoom="true"
         :grab-cursor="true"
         :keyboard="true"
+        :virtual="true"
+        :zoom="true"
+        :lazy="true"
+        :effect="'coverflow'"
       >
-        <swiper-slide>
-          <div class="swiper-zoom-container">
-            <img :src="imageSource" alt="Weather map" @error="onImageError" v-if="isImageVisible"/>
-          </div>
-        </swiper-slide>
-      </swiper-container>
+      </swiper-container>        
     
       </ion-content>
       <ion-footer id="my_footer" class="ion-no-border">
@@ -299,7 +112,6 @@ export default defineComponent({
                         @ionChange="onMapChange($event.detail.value)"
                         label-placement="stacked"
                         justify="end"
-                        :value="map"
                         class="dark"
                       >
                         <ion-select-option value="1">500hPa geopot.,MSL pres., ReTop</ion-select-option>
@@ -401,7 +213,6 @@ export default defineComponent({
                         @ionChange="onMapChange($event.detail.value)"
                         label-placement="stacked"
                         justify="end"
-                        :value="map"
                         class="dark"
                       >
                         <ion-select-option value="DWD_Analyse">Deutscher Wetterdienst</ion-select-option>

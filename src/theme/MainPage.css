@@ -1,134 +1,102 @@
  #my_footer {
-    min-height: fit-content;
-    max-height: fit-content;
-    text-align: center;
-    align-self: right;
-    position: fixed;
-    bottom: 0;
-  }
-  
-  ion-list {
-    max-width: 300px;
-    min-width: 300px;
-    max-height: 50px;
-    padding: 0;
-    margin: 0 !important;
-    background-color: rgba(0,0,0);
-    opacity: 0.7;
-    align-self: stretch;
-  }
-  
-  ion-select {
-    text-align: center;
-    font-size: 1 em;
-    font-weight: bold;
-    color: white;
-  }
+  min-height: fit-content;
+  max-height: fit-content;
+  text-align: center;
+  align-self: right;
+  position: fixed;
+  bottom: 0;
+}
 
-  ion-select::part(placeholder) {
-    color: white;
-    opacity: 1 !important;
-  }
+ion-list {
+  max-width: 300px;
+  min-width: 300px;
+  max-height: 50px;
+  padding: 0;
+  margin: 0 !important;
+  background-color: rgba(0,0,0);
+  opacity: 0.7;
+  align-self: stretch;
+}
 
-   ion-fab-button::part(native) {
-    background-color: rgba(0, 0, 0, 0.7) !important;
-    border-radius: 4px;
-    box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
-    color: white;
-  }
-  
-  
-  ion-header {
-    opacity: 70%;
-  }
-  
-  #transparent {
-    color: white;
-    background-color: transparent;
-  }
-  
-  ion-menu {
-    --background: rgba(0, 0, 0, 0.7);
-    --ion-background-color: transparent;
-    --ion-color-base: transparent !important;
-    left: 0px;
-  }
+ion-select {
+  text-align: center;
+  font-size: 1 em;
+  font-weight: bold;
+  color: white;
+}
 
-  .scrollable-content {
-    --overflow: scroll; /* Enables scrolling */
-  }
-  
-  .scrollable-img {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    height: auto; /* Allows the image to adjust its height dynamically */
-    object-fit: cover; /* Ensures the image scales proportionally */
-  }
-  
-  /* Right */
-  #foot_menu {
-    min-width: 400px;
-    width: fit-content;
-    position: fixed;
-    right: 0;
-    /* transform: translate(-50%); */
-    bottom: 0;
-    padding: 1em;
-    /* height: 88px; */
-    height: fit-content;
-    border-radius: 12px;
-    border-color: white;
-    border-style: solid;
-    border-width: thin;
-  }
+ion-select::part(placeholder) {
+  color: white;
+  opacity: 1 !important;
+}
 
-  /* Name	Value	  Description
-      xs	100%	  Width is 100% for xs screens
-      sm	540px	  Set grid width to 540px when (min-width: 576px)
-      md	720px	  Set grid width to 720px when (min-width: 768px)
-      lg	960px	  Set grid width to 960px when (min-width: 992px)
-      xl	1140px	Set grid width to 1140px when (min-width: 1200px) 
-  */
+ion-fab-button::part(native) {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  border-radius: 4px;
+  box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
+  color: white;
+}
 
-  ion-grid {
-    --ion-grid-width: 620px;
 
-    --ion-grid-width-xs: 310px;
-    --ion-grid-width-sm: 620px;
-    --ion-grid-width-md: 620px;
-    --ion-grid-width-lg: 620px;
-    --ion-grid-width-xl: 620px;
-  }
+ion-header {
+  opacity: 70%;
+}
 
-  .dark {
-    background-color: rgba(0, 0, 0, 0.7) !important;
-    /* color: #ffffff; */
-  }
+ion-menu {
+  --background: rgba(0, 0, 0, 0.7);
+  --ion-background-color: transparent;
+  --ion-color-base: transparent !important;
+  left: 0px;
+}
 
-  #missing_data {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    color: white;
-  }
+/* Right */
+#foot_menu {
+  min-width: 400px;
+  width: fit-content;
+  position: fixed;
+  right: 0;
+  /* transform: translate(-50%); */
+  bottom: 0;
+  padding: 1em;
+  /* height: 88px; */
+  height: fit-content;
+  border-radius: 12px;
+  border-color: white;
+  border-style: solid;
+  border-width: thin;
+}
 
-  ion-segment-button {
-    --indicator-color: white;
-    --color-checked: white;
-  }
+/* Name	Value	  Description
+    xs	100%	  Width is 100% for xs screens
+    sm	540px	  Set grid width to 540px when (min-width: 576px)
+    md	720px	  Set grid width to 720px when (min-width: 768px)
+    lg	960px	  Set grid width to 960px when (min-width: 992px)
+    xl	1140px	Set grid width to 1140px when (min-width: 1200px) 
+*/
 
-  swiper-container {
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
-  
-  .swiper-zoom-container>img {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    object-position: center;
+ion-grid {
+  --ion-grid-width: 620px;
+
+  --ion-grid-width-xs: 310px;
+  --ion-grid-width-sm: 620px;
+  --ion-grid-width-md: 620px;
+  --ion-grid-width-lg: 620px;
+  --ion-grid-width-xl: 620px;
+}
+
+.dark {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  /* color: #ffffff; */
+}
+
+ion-segment-button {
+  --indicator-color: white;
+  --color-checked: white;
+}
+
+swiper-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: auto;
 }

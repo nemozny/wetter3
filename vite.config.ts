@@ -10,11 +10,12 @@ export default defineConfig({
       template: {
         compilerOptions: {
           // treat all tags with a dash as custom elements
-          isCustomElement: (tag) => tag.includes('swiper')
+          isCustomElement: (tag) => tag.includes('swiper'),
         }
       }
     }),
     VitePWA({ 
+      injectRegister: 'auto',
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'robots.txt', 'android-chrome-192x192.png', 'android-chrome-512x512.png', 
         'apple-touch-icon.png', 'favicon-16x16.png', 'favicon-32x32.png'],
@@ -58,6 +59,9 @@ export default defineConfig({
     },
   },
   test: {
+    // alias: {
+    //   '@/': new URL('./src/', import.meta.url).pathname, 
+    // },
     globals: true,
     environment: 'jsdom',
     isolate: false,
