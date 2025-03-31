@@ -1,3 +1,19 @@
+:root {
+  --custom-background: black;
+  --custom-color: white;
+  --custom-box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
+  --custom-box-bigger-shadow: 0px 4px 8px 2px white;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --custom-background: white;
+    --custom-color: black;
+    --custom-box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 1), 0px 1px 3px 1px rgba(0, 0, 0, 1);
+    --custom-box-bigger-shadow: 0px 4px 8px 2px black;
+  }
+}
+
 ion-footer {
   min-height: fit-content;
   max-height: fit-content;
@@ -8,75 +24,70 @@ ion-footer {
   z-index: 10;
 }
 
+ion-header {
+  opacity: 70%;
+}
+
+ion-menu-button {
+  color: var(--custom-color);
+}
+
+
+/* LIST */
 ion-list {
-  max-width: 300px;
-  min-width: 300px;
+  width: 300px;
   padding: 0;
   margin: 0 !important;
   opacity: 0.7;
   align-self: stretch;
-  box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
+  box-shadow: var(--custom-box-shadow);
   align-items: center;
   justify-content: center;
   display: flex;
 }
 
 ion-item {
-  width: 100%; /* Make ion-item take the full width of ion-list */
-  text-align: center; /* Center the text inside the item */
+  width: 100%;
+  text-align: center;
+  height: 28px;
+  display: flex;
 }
 
 ion-select {
-  width: 100%; /* Ensure ion-select spans the full width of ion-item */
+  width: 100%;
   text-align: center;
-  font-size: 1em;
-  font-weight: bold;
-  color: white;
-  padding: 0 10px; /* Add padding to prevent text from being cut off */
+  color: var(--custom-color);
 }
 
-ion-select::part(placeholder) {
-  color: white;
-  opacity: 1 !important;
-}
 
-ion-fab-button::part(native) {
-  background-color: rgba(0, 0, 0, 0.7) !important;
-  border-radius: 4px;
-  box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
-  color: white;
-}
-
-ion-header {
-  opacity: 70%;
-}
-
-ion-menu-button {
-  color: white;
-}
-
-ion-list,
-ion-fab-button,
-ion-segment-button,
-ion-segment {
+/* FABS */
+ion-fab-button {
   height: 28px;
 }
 
-/* Right */
-#foot_menu {
-  min-width: 400px;
-  width: fit-content;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  padding: 1em;
-  height: fit-content;
-  border-radius: 12px;
-  border-color: white;
-  border-style: solid;
-  border-width: thin;
+ion-fab-button::part(native) {
+  background-color: var(--custom-background);
+  border-radius: 8px;
+  box-shadow: var(--custom-box-shadow);
+  color: var(--custom-color);
 }
 
+
+/* SEGMENTS */
+ion-segment-button::part(native) {
+  opacity: 0.5;
+  background-color: var(--custom-background);
+  box-shadow: var(--custom-box-shadow);
+}
+
+ion-segment-button.segment-button-checked::part(native) {
+  background-color: var(--custom-background);
+  opacity: 1;
+  box-shadow: var(--custom-box-shadow);
+}
+
+
+/* GRID */
 /* Name	Value	  Description
     xs	100%	  Width is 100% for xs screens
     sm	540px	  Set grid width to 540px when (min-width: 576px)
@@ -95,20 +106,8 @@ ion-grid {
   --ion-grid-width-xl: 620px;
 }
 
-.dark {
-  background-color: rgba(0, 0, 0, 0.7) !important;
-  /* color: #ffffff; */
-}
 
-ion-segment {
-  box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
-}
-
-ion-segment-button {
-  --indicator-color: black;
-  --color-checked: white;
-}
-
+/* SWIPER */
 swiper-container {
   position: absolute;
   width: 100%;

@@ -1,7 +1,3 @@
-<style lang="css" scoped>
-@import '../theme/MainPage.css';
-</style>
-
 <script lang="ts" src='../script/MainPage.ts'>
 </script>
 
@@ -31,7 +27,7 @@
               </ion-buttons>
             </ion-col>
             <ion-col class="ion-text-center">
-              <ion-title>WETTER3</ion-title>
+              <ion-title><b>WETTER3</b></ion-title>
             </ion-col>
             <ion-col size="auto" class="ion-text-right">
               <ion-text><sub>Map timestamp in local time</sub></ion-text><br />
@@ -62,10 +58,10 @@
 
     <ion-grid :fixed="true" class="ion-no-padding">
       <ion-segment @ion-change="onSegmentChange($event)" value="maps" mode="ios">
-        <ion-segment-button value="maps" content-id="maps" class="dark">
+        <ion-segment-button value="maps" content-id="maps">
           <ion-label>Weather maps</ion-label>
         </ion-segment-button>
-        <ion-segment-button value="analyse" content-id="analyse" class="dark">
+        <ion-segment-button value="analyse" content-id="analyse">
           <ion-label>Weather analysis</ion-label>
         </ion-segment-button>
       </ion-segment>
@@ -106,8 +102,8 @@
               </ion-col>
 
               <ion-col size="auto">
-                <ion-list :inset="true" class="dark" mode="ios">
-                  <ion-item class="dark">
+                <ion-list :inset="true" mode="ios">
+                  <ion-item>
                     <ion-select
                       aria-label="Maps"
                       interface="modal"
@@ -115,7 +111,6 @@
                       @ionChange="onMapChange($event.detail.value)"
                       label-placement="stacked"
                       justify="end"
-                      class="dark"
                     >
                       <ion-select-option value="1">500hPa geopot.,MSL pres., ReTop</ion-select-option>
                       <ion-select-option value="2">700hPa relative humidity</ion-select-option>
@@ -207,8 +202,8 @@
               </ion-col>
 
               <ion-col size="auto">
-                <ion-list :inset="true" class="dark">
-                  <ion-item class="dark">
+                <ion-list :inset="true" mode="ios">
+                  <ion-item>
                     <ion-select
                       aria-label="Analyse"
                       interface="modal"
@@ -216,7 +211,6 @@
                       @ionChange="onMapChange($event.detail.value)"
                       label-placement="stacked"
                       justify="end"
-                      class="dark"
                     >
                       <ion-select-option value="DWD_Analyse">Deutscher Wetterdienst</ion-select-option>
                       <ion-select-option value="UKMet_Analyse">UK Met</ion-select-option>

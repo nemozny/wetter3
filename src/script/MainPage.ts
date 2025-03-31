@@ -9,7 +9,8 @@ import {
   IonSegmentView,
   IonSegmentButton,
   IonSegmentContent,
-  IonLabel
+  IonLabel,
+  IonText
 } from '@ionic/vue';
 import { chevronBack, chevronDown, chevronForward, chevronUp, refreshOutline } from 'ionicons/icons';
 import { defineComponent, ref, onMounted, reactive } from 'vue';
@@ -44,7 +45,7 @@ export default defineComponent({
   components: {
     IonContent, IonHeader, IonMenu, IonMenuButton, IonPage, IonTitle, IonToolbar, IonFooter, IonSelectOption, IonSelect, IonList,
     IonGrid, IonRow, IonCol, IonFabButton, IonIcon, IonItem, IonButtons, IonImg, IonSegment, IonSegmentView, IonSegmentButton, IonSegmentContent,
-    IonLabel
+    IonLabel, IonText
   },
 
   setup() {

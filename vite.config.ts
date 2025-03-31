@@ -33,6 +33,18 @@ export default defineConfig({
         theme_color: '#ffffff',
         icons: [
           {
+            "src": "/wetter3/img/icons/icon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png",
+            "purpose": "any"
+          },
+          {
+            "src": "/wetter3/img/icons/icon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png",
+            "purpose": "any"
+          },
+          {
             "src": "/img/icons/pwa-192x192.png",
             "sizes": "192x192",
             "type": "image/png",

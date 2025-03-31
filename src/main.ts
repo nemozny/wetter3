@@ -1,8 +1,13 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
-import { registerSW } from 'virtual:pwa-register';
 
+import type { RegisterSWOptions } from 'vite-plugin-pwa/types'
+const registerSW = function(options?: RegisterSWOptions): (reloadPage?: boolean) => Promise<void> {
+  return async (reloadPage?: boolean) => {
+    console.log('Service worker registered', options, reloadPage);
+  };
+};
 
 import { IonicVue } from '@ionic/vue';
 
@@ -24,6 +29,9 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+
+/* My custom CSS */
+import './theme/MainPage.css';
 
 const updateSW = registerSW({
   onNeedRefresh() {
