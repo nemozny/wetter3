@@ -33,8 +33,9 @@ document.addEventListener('error', function(e: Event) {
   const target = e.target as HTMLImageElement;
   if (target.tagName === 'IMG') {
     console.error('Image not found:', target.src);
-    const currentPageRoot = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/');
-    target.src = `${currentPageRoot}img/error/error.png`;
+    // const currentPageRoot = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/');
+    // target.src = `${currentPageRoot}img/error/error.png`;
+    target.remove();
   }
 }, true);
 

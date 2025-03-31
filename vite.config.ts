@@ -17,8 +17,15 @@ export default defineConfig({
     VitePWA({ 
       injectRegister: 'auto',
       registerType: 'autoUpdate',
-      includeAssets: ['favicon.ico', 'robots.txt', 'android-chrome-192x192.png', 'android-chrome-512x512.png', 
-        'apple-touch-icon.png', 'favicon-16x16.png', 'favicon-32x32.png'],
+      includeAssets: [
+        '/img/icons/favicon.ico', 
+        '/public/robots.txt', 
+        '/img/icons/pwa-192x192.png', 
+        '/img/icons/pwa-512x512.png', 
+        '/img/icons/apple-touch-icon.png', 
+        '/img/icons/favicon-16x16.png', 
+        '/img/icons/favicon-32x32.png',
+      ],
       manifest: {
         name: 'Wetter3',
         short_name: 'Wetter3',
@@ -49,7 +56,7 @@ export default defineConfig({
             "type": "image/png",
             "purpose": "maskable"
           }
-        ]
+        ],
       }
     })
   ],

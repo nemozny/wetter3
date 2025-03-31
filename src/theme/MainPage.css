@@ -16,6 +16,7 @@ ion-list {
   background-color: rgba(0,0,0);
   opacity: 0.7;
   align-self: stretch;
+  box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
 }
 
 ion-select {
@@ -90,7 +91,7 @@ ion-grid {
 }
 
 ion-segment-button {
-  --indicator-color: white;
+  --indicator-color: black;
   --color-checked: white;
 }
 
@@ -99,4 +100,5 @@ swiper-container {
   top: 0;
   width: 100%;
   height: auto;
+  --swiper-navigation-color: black;
 }
