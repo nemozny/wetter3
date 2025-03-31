@@ -33,9 +33,10 @@ document.addEventListener('error', function(e: Event) {
   const target = e.target as HTMLImageElement;
   if (target.tagName === 'IMG') {
     console.error('Image not found:', target.src);
-    // const currentPageRoot = window.location.origin + window.location.pathname.replace(/\/[^/]*$/, '/');
-    // target.src = `${currentPageRoot}img/error/error.png`;
     target.remove();
+
+    const current_date = document.getElementById("current_date");
+    current_date.innerHTML = '';
   }
 }, true);
 
@@ -152,7 +153,15 @@ export default defineComponent({
       const current_slide_data = slide_list.value[index];
       const current_date = current_slide_data.date;
       if (date_element.value) {
-        date_element.value.innerText = new Date(current_date).toLocaleString();
+        // Clear any existing content in date_element
+        date_element.value.innerHTML = '';
+
+        // Create a new <sub> element
+        const subElement = document.createElement('sub');
+        subElement.textContent = new Date(current_date).toLocaleString();
+
+        // Append the <sub> element to date_element
+        date_element.value.appendChild(subElement);
       }
     };
 

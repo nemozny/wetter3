@@ -1,6 +1,8 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
+import { registerSW } from 'virtual:pwa-register';
+
 
 import { IonicVue } from '@ionic/vue';
 
@@ -22,6 +24,17 @@ import '@ionic/vue/css/display.css';
 
 /* Theme variables */
 import './theme/variables.css';
+
+const updateSW = registerSW({
+  onNeedRefresh() {
+    if (confirm('New content available. Click OK to update.')) {
+      updateSW();
+    }
+  },
+  onOfflineReady() {
+    console.log('App ready to work offline');
+  },
+});
 
 const app = createApp(App)
   .use(IonicVue)

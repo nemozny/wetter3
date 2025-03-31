@@ -1,16 +1,16 @@
- #my_footer {
+ion-footer {
   min-height: fit-content;
   max-height: fit-content;
   text-align: center;
   align-self: right;
   position: fixed;
   bottom: 0;
+  z-index: 10;
 }
 
 ion-list {
   max-width: 300px;
   min-width: 300px;
-  height: 40px;
   padding: 0;
   margin: 0 !important;
   opacity: 0.7;
@@ -51,16 +51,25 @@ ion-header {
   opacity: 70%;
 }
 
+ion-menu-button {
+  color: white;
+}
+
+ion-list,
+ion-fab-button,
+ion-segment-button,
+ion-segment {
+  height: 28px;
+}
+
 /* Right */
 #foot_menu {
   min-width: 400px;
   width: fit-content;
   position: fixed;
   right: 0;
-  /* transform: translate(-50%); */
   bottom: 0;
   padding: 1em;
-  /* height: 88px; */
   height: fit-content;
   border-radius: 12px;
   border-color: white;
