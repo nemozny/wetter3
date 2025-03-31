@@ -48,7 +48,7 @@ Wetter3.de
 Dipl.-Met. Rainer Behrendt & Dipl.-Met. Dr. Holger Mahlke, GbR
 
 ## Acknowledgments
-Built with Vue 3, Ionic Framework, and Capacitor.
+Built with Vue 3, Ionic Framework, Vite and Capacitor.
 
 Weather data sourced from Wetter3.de.
 

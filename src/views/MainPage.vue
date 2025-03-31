@@ -23,19 +23,21 @@
   <ion-page id="main-content">
     <ion-header>
       <ion-toolbar>
-        <ion-row class="ion-align-items-center">
-          <ion-col size="1" pull="start">
-            <ion-buttons>
-              <ion-menu-button></ion-menu-button>
-            </ion-buttons>
-          </ion-col>
-          <ion-col offset="3" size="3">
-            <ion-title>Wetter3.de</ion-title>
-          </ion-col>
-          <ion-col offset="2" size="3">
-            <ion-title id="current_date"></ion-title>
-          </ion-col>
-        </ion-row>
+        <ion-grid class="ion-no-padding">
+          <ion-row class="ion-align-items-center">
+            <ion-col size="auto">
+              <ion-buttons>
+                <ion-menu-button></ion-menu-button>
+              </ion-buttons>
+            </ion-col>
+            <ion-col class="ion-text-center">
+              <ion-title>WETTER3</ion-title>
+            </ion-col>
+            <ion-col size="auto" class="ion-text-right">
+              <ion-title id="current_date"></ion-title>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-toolbar>
     </ion-header>
 

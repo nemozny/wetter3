@@ -10,20 +10,29 @@
 ion-list {
   max-width: 300px;
   min-width: 300px;
-  max-height: 50px;
+  height: 40px;
   padding: 0;
   margin: 0 !important;
-  background-color: rgba(0,0,0);
   opacity: 0.7;
   align-self: stretch;
   box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+ion-item {
+  width: 100%; /* Make ion-item take the full width of ion-list */
+  text-align: center; /* Center the text inside the item */
 }
 
 ion-select {
+  width: 100%; /* Ensure ion-select spans the full width of ion-item */
   text-align: center;
-  font-size: 1 em;
+  font-size: 1em;
   font-weight: bold;
   color: white;
+  padding: 0 10px; /* Add padding to prevent text from being cut off */
 }
 
 ion-select::part(placeholder) {
@@ -38,16 +47,8 @@ ion-fab-button::part(native) {
   color: white;
 }
 
-
 ion-header {
   opacity: 70%;
-}
-
-ion-menu {
-  --background: rgba(0, 0, 0, 0.7);
-  --ion-background-color: transparent;
-  --ion-color-base: transparent !important;
-  left: 0px;
 }
 
 /* Right */
@@ -90,6 +91,10 @@ ion-grid {
   /* color: #ffffff; */
 }
 
+ion-segment {
+  box-shadow: 0px 1px 2px 0px rgba(255 255, 255, 1), 0px 1px 3px 1px rgba(255, 255, 255, 1);
+}
+
 ion-segment-button {
   --indicator-color: black;
   --color-checked: white;
@@ -97,8 +102,19 @@ ion-segment-button {
 
 swiper-container {
   position: absolute;
-  top: 0;
   width: 100%;
   height: auto;
   --swiper-navigation-color: black;
+
+  /* Center in portrait mode */
+  @media (orientation: portrait) {
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  /* Start at the very top in landscape mode */
+  @media (orientation: landscape) {
+    top: 0;
+    transform: translate(0, 0);
+  }
 }

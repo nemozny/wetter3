@@ -260,6 +260,11 @@ export default defineComponent({
     };
 
     const onSegmentChange = (event: CustomEvent): void => {
+      if (!event.detail || !event.detail.value) {
+        console.error("Invalid event detail:", event.detail);
+        return;
+      }
+
       selected_segment.value = event.detail.value;
       selected_map.value = default_maps[selected_segment.value];
       refresh_slides_for_date(original_date.value);
@@ -267,6 +272,11 @@ export default defineComponent({
 
     onMounted(() => {
       swiper_container.value = document.querySelector('swiper-container');
+      if (!swiper_container.value) {
+        console.error("Swiper container not found");
+        return;
+      }
+
       date_element.value = document.getElementById("current_date");
 
       const now = new Date(Date.UTC(
@@ -288,6 +298,10 @@ export default defineComponent({
       Object.assign(swiper_container.value, swiper_params);
       swiper_container.value.initialize();
       swiper.value = swiper_container.value.swiper;
+      if (!swiper.value) {
+        console.error("Swiper not found");
+        return;
+      }
 
       console.log("Swiper initialized with slides:", swiper.value.slides.length, " and switched to index:", current_index.value);
 

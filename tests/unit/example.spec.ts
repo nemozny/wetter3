@@ -13,13 +13,13 @@ describe('MainPage.vue', () => {
 describe('MainPage.vue', () => {
   test('contains specific element', () => {
       const wrapper = mount(Main)
-      expect(wrapper.find('header').exists()).toBe(true) // Replace 'header' with an actual element in your component
+      expect(wrapper.find('ion-header').exists()).toBe(true)
   })
 });
 
 describe('MainPage.vue', () => {
   test('renders home vue', () => {
     const wrapper = mount(Main)
-    expect(wrapper.text()).toMatch('Wetter3.de')
+    expect(wrapper.text()).toMatch('WETTER3')
   })
 });
