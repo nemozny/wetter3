@@ -63,12 +63,5 @@
       "type": "image/png",
       "form_factor" : "wide"
     }
-  ],
-  "custom_images": [
-    {
-      "src": "/wetter3/img/error/error.png",
-      "description": "Error image",
-      "type": "image/png"
-    }
   ]
 }
