@@ -3,14 +3,20 @@
   "short_name": "Wetter3",
   "icons": [
     {
-      "src": "/wetter3/img/icons/icon-16x16.png",
+      "src": "/wetter3/img/icons/favicon-16x16.png",
       "sizes": "16x16",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/wetter3/img/icons/icon-32x32.png",
+      "src": "/wetter3/img/icons/favicon-32x32.png",
       "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/wetter3/img/icons/favicon-96x96.png",
+      "sizes": "96x96",
       "type": "image/png",
       "purpose": "any"
     },
@@ -49,7 +55,7 @@
   "categories" : ["weather"],
   "dir": "ltr",
   "lang": "en-US",
-  "orientation": "landscape",
+  "orientation": "any",
   "prefer_related_applications": false,
   "related_applications": [],
   "launch_handler": {
@@ -61,17 +67,13 @@
   "screenshots": [
     {
       "src": "/wetter3/img/screenshots/screenshot1.png",
-      "sizes": "844x392",
-      "type": "image/png"
+      "sizes": "1845x908",
+      "type": "image/png",
+      "form_factor" : "wide"
     },
     {
       "src": "/wetter3/img/screenshots/screenshot2.png",
-      "sizes": "1108x783",
-      "type": "image/png"
-    },
-    {
-      "src": "/wetter3/img/screenshots/screenshot3.png",
-      "sizes": "1845x908",
+      "sizes": "1919x1079",
       "type": "image/png",
       "form_factor" : "wide"
     }

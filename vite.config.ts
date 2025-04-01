@@ -9,67 +9,25 @@ export default defineConfig({
     vue({
       template: {
         compilerOptions: {
-          // treat all tags with a dash as custom elements
+          // to fix an error with Swiper
           isCustomElement: (tag) => tag.includes('swiper'),
         }
       }
     }),
+    // PWA configuration
     VitePWA({ 
       injectRegister: 'auto',
       registerType: 'autoUpdate',
       includeAssets: [
-        '/img/icons/favicon.ico', 
-        '/public/robots.txt', 
-        '/img/icons/pwa-192x192.png', 
-        '/img/icons/pwa-512x512.png', 
-        '/img/icons/apple-touch-icon.png', 
-        '/img/icons/favicon-16x16.png', 
-        '/img/icons/favicon-32x32.png',
+        'favicon.ico', 
+        'favicon.svg',
+        'robots.txt', 
+        'manifest.json',
+        '/img/icons/*.png',
+        '/img/screenshots/*.png',
       ],
-      manifest: {
-        name: 'Wetter3',
-        short_name: 'Wetter3',
-        description: 'Wetter3 - Weathers Maps for Mobile',
-        theme_color: '#ffffff',
-        icons: [
-          {
-            "src": "/wetter3/img/icons/icon-16x16.png",
-            "sizes": "16x16",
-            "type": "image/png",
-            "purpose": "any"
-          },
-          {
-            "src": "/wetter3/img/icons/icon-32x32.png",
-            "sizes": "32x32",
-            "type": "image/png",
-            "purpose": "any"
-          },
-          {
-            "src": "/img/icons/pwa-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any"
-          },
-          {
-            "src": "/img/icons/pwa-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any"
-          },
-          {
-            "src": "/img/icons/pwa-maskable-192x192.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "maskable"
-          },
-          {
-            "src": "/img/icons/pwa-maskable-512x512.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "maskable"
-          }
-        ],
-      }
+      manifest: false,
+      manifestFilename: 'manifest.json',
     })
   ],
   resolve: {

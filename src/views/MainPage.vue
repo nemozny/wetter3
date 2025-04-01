@@ -38,7 +38,7 @@
       </ion-toolbar>
     </ion-header>
 
-    <ion-content :fullscreen="true" class="scrollable-content" color="light" scroll="true">
+    <ion-content :fullscreen="true" color="light" scroll="true">
       <swiper-container
         init="false"
         :slides-per-view="1"
