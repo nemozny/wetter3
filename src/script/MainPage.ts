@@ -167,7 +167,7 @@ export default defineComponent({
     };
 
     // Slide change event handler
-    const slideChangeTransitionEnd = (): void => {
+    const updateSlides = (): void => {
       if (swiper.value.destroyed) return;
       if (swiper.value.virtual.slides.length === 0) return;
 
@@ -315,7 +315,7 @@ export default defineComponent({
 
       console.log("Swiper initialized with slides:", swiper.value.slides.length, " and switched to index:", current_index.value);
 
-      swiper.value.on('slideChangeTransitionEnd', slideChangeTransitionEnd);
+      swiper.value.on('transitionEnd', updateSlides);
       swiper.value.on('virtualUpdate', () => {
         track_current_slide(current_index.value);
       });
