@@ -3,14 +3,20 @@
   "short_name": "Wetter3",
   "icons": [
     {
-      "src": "/wetter3/img/icons/icon-16x16.png",
+      "src": "/wetter3/img/icons/favicon-16x16.png",
       "sizes": "16x16",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/wetter3/img/icons/icon-32x32.png",
+      "src": "/wetter3/img/icons/favicon-32x32.png",
       "sizes": "32x32",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/wetter3/img/icons/favicon-96x96.png",
+      "sizes": "96x96",
       "type": "image/png",
       "purpose": "any"
     },
