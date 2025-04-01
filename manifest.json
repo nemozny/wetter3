@@ -55,7 +55,7 @@
   "categories" : ["weather"],
   "dir": "ltr",
   "lang": "en-US",
-  "orientation": "landscape",
+  "orientation": "any",
   "prefer_related_applications": false,
   "related_applications": [],
   "launch_handler": {
